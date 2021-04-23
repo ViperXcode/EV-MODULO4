@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PRODUCTOS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="PMODULO4.JS"></script>
+</head>
+<body>
+    <div id="appPRODUCTOs" class="container">
+
+        <section class="form">
+            <form action="" class="text-center">
+                <input v-model="MARCA" @keyup.enter="crearPRODUCTO" type="text" class="form-control" placeholder="MARCA">
+                <input v-model="STOCK" @keyup.enter="crearPRODUCTO" type="number" name="STOCK" placeholder="STOCK" class="form-control">
+
+                <input @click="crearPRODUCTO" type="button" value="Añadir" class="btn btn-success">
+            </form>
+        </section>
+
+        <section class="data">
+            <caption>PRODUCTOS</caption>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">MARCA</th>
+                        <th scope="col">STOCK</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(PRODUCTO, index) in PRODUCTOs">
+                        <td>{{ PRODUCTO.id }}</td>
+                        <td>
+                            <span v-if="formActualizar && idActualizar == index">
+
+                                <input v-model="MARCAActualizar" type="text" class="form-control">
+                            </span>
+                            <span v-else>
+                                <!-- Dato MARCA -->
+                                {{ PRODUCTO.MARCA }}
+                            </span>
+                        </td>
+                        <td>
+                            <span v-if="formActualizar && idActualizar == index">
+
+                                <input v-model="STOCKActualizar" type="text" class="form-control">
+                            </span>
+                            <span v-else>
+                                <!-- Dato STOCK -->
+                                {{ PRODUCTO.STOCK }}
+                            </span>
+                        </td>
+                        <td>
+
+                            <span v-if="formActualizar && idActualizar == index">
+                                <button @click="guardarActualizacion(index)" class="btn btn-success">Guardar</button>
+                            </span>
+                            <span v-else>
+
+                                <button @click="verFormActualizar(index)" class="btn btn-warning">Actualizar</button>
+
+                                <button @click="borrarPRODUCTO(index)" class="btn btn-danger">Borrar</button>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+</body>
+</html>
